@@ -1,6 +1,9 @@
 package es.telefonica.talentum.raul.cards.model;
 
 public class Deck {
+    public Deck() {
+    }
+
     private int remaining;
     private String id;
 
@@ -8,7 +11,7 @@ public class Deck {
         this.remaining = remaining;
     }
 
-    public Deck(String id) {                //esto no funcionaria con REALM, no tiene contructor por defecto, ahora lo hemos metido
+    public Deck(String id) {                //esto no funcionaria con REALM, no tiene contructor por defecto, ahora lo hemos metido, ahora si va
         this.id = id;
     }
 
