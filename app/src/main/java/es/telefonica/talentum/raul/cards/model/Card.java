@@ -13,6 +13,15 @@ public class Card {
     private Suit suit;                                                                              //baraja
     private String image;                                                                           //foto de la carta
 
+    private int remainingCard;
+
+    public int getRemainingCard() {
+        return remainingCard;
+    }
+
+    public void setRemainingCard(int remainingCard) {
+        this.remainingCard = remainingCard;
+    }
 
     public Suit getSuit() {
         return suit;

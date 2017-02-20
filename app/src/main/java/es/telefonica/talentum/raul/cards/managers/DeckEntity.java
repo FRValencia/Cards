@@ -4,7 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class DeckEntity {
     @SerializedName("remaining") private int remaining;
-    @SerializedName("deckId") private String deckId;
+
+    public String getDeckId() {
+        return deckId;
+    }
+
+    public void setDeckId(String deckId) {
+        this.deckId = deckId;
+    }
+
+    @SerializedName("deck_id") private String deckId;
     @SerializedName("success") private boolean success;
     @SerializedName("shuffled") private boolean shuffled;
 
@@ -17,13 +26,7 @@ public class DeckEntity {
         this.remaining = remaining;
     }
 
-    public String getDeckId() {
-        return deckId;
-    }
 
-    public void setDeckId(String deckId) {
-        this.deckId = deckId;
-    }
 
     public boolean isSuccess() {
         return success;

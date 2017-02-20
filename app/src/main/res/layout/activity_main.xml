@@ -20,10 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="50sp"
-        android:text="48 cards left!"
         android:gravity="center"
         android:textColor="#ffc000"
-        android:background="#ddddddff"
+        android:background="#5a000000"
         />
 
 

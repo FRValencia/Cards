@@ -14,28 +14,33 @@ import com.google.gson.GsonBuilder;
 import java.io.Reader;
 import java.io.StringReader;
 
+import es.telefonica.talentum.raul.cards.model.Card;
 import es.telefonica.talentum.raul.cards.model.Deck;
 
-public class DeckApiManager {
+public class CardApiManager {
 
-    public interface DeckApiManagerNewDeckListener {
-        public void onNewDeck(Deck deck);
+    public interface CardApiManagerNewCardListener {
+        public void onNewCard(Card card);
     }
 
-    private DeckApiManagerNewDeckListener listener;
+    private CardApiManagerNewCardListener listener;
 
-    public void setOnNewDeckListener(DeckApiManagerNewDeckListener listener) {
+    public void setOnNewCardListener(CardApiManagerNewCardListener listener) {
         this.listener = listener;
     }
 
-    private static final String NEW_DECK_REQUEST = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
+    private static final String INICIO = "https://deckofcardsapi.com/api/deck/";
+    private static final String FIN = "/draw/?count=1";
 
 
-    public void newDeck(Context context){
+    public void newCard(Context context, Deck deck){
+
+    String URL=INICIO+deck.getId()+FIN;
+      //  Log.d("error bug", deck.getId());
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        StringRequest request = new StringRequest(NEW_DECK_REQUEST, new Response.Listener<String>() {       // si funciona
+        StringRequest request = new StringRequest(URL, new Response.Listener<String>() {       // si funciona
             @Override
             public void onResponse(String response) {
                 Log.d("RESPONSE", response);
@@ -55,19 +60,14 @@ public class DeckApiManager {
         Gson gson = new GsonBuilder().create();
         Reader reader = new StringReader(response);
 
-        DeckEntity deckEntity = gson.fromJson(reader , DeckEntity.class);
+        CardEntity cardEntity = gson.fromJson(reader , CardEntity.class);
 
-        Deck deck = new Deck();
-        deck.setId(deckEntity.getDeckId());
-        Log.d("error bug", deck.getId());
-        deck.setRemaining(deckEntity.getRemaining());
+        Card card = new Card();
+        card.setImage(cardEntity.getCards().get(0).getImagecard());
+        card.setRemainingCard(cardEntity.getRemaining());
 
         if (listener!=null) {
-            listener.onNewDeck(deck);
+            listener.onNewCard(card);
         }
     }
 }
-
-
-
-
